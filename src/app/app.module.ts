@@ -1,8 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+import { HomeModule } from './modules/home/home.module';
+import { NotFoundModule } from './modules/not-found/not-found.module';
+
+const routes: Routes = [
+  { path: "", loadChildren: () => HomeModule },
+  { path: "**", loadChildren: () => NotFoundModule }
+];
 
 @NgModule({
   declarations: [
@@ -10,7 +17,8 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    HttpClientModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
