@@ -11,7 +11,7 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  public fetchProducts(): Observable<Product[]> {
+  public fetchProductsFromDB(): Observable<Product[]> {
     let observable: Observable<any> = this.http.get(API.products.fetchProducts);
     return observable;
   }

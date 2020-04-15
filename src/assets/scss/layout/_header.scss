@@ -1,0 +1,20 @@
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    li.nav-item {
+        position: relative;
+        span.badge {
+            position: absolute;
+            top: 0;
+            right: -5px;
+            color: $color-default-lightest;
+            background-color: $color-red-400;
+            @include box-square(20px, 14px);
+            @include border-radius(100%);
+            @include font-size($fs-small);
+        }
+    }
+}

@@ -3,7 +3,7 @@ export class Product {
     createdAt: Date;
     name: string;
     image: URL;
-    price: string;
+    price: number;
     type: string;
     publish_from: Date;
     publish_to: Date;

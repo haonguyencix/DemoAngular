@@ -1,1 +1,71 @@
-<p>cart works!</p>
+<div id="cart">
+  <div class="container">
+    <table class="table" *ngIf="cart.length; else noSelected">
+      <thead>
+        <tr>
+          <th>Hình ảnh</th>
+          <th>Sản phẩm</th>
+          <th>Đơn giá</th>
+          <th>Số lượng</th>
+          <th>Tổng</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let item of cart">
+          <tr class="cart-item" *ngIf="item.product">
+            <td>
+              <img [src]="item.product.image" [alt]="item.product.name" />
+            </td>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.product.price | number }}$</td>
+            <td>
+              <div class="btns">
+                <button
+                  class="btn btn-info"
+                  (click)="adjustQuantity(item.product.id, -1)"
+                >
+                  -
+                </button>
+                <span>{{ item.quantity }}</span>
+                <button
+                  class="btn btn-info"
+                  (click)="adjustQuantity(item.product.id, +1)"
+                >
+                  +
+                </button>
+              </div>
+            </td>
+            <td>{{ item.product.price * item.quantity }}$</td>
+            <td class="text-center">
+              <button
+                class="btn btn-danger"
+                (click)="removeItem(item.product.id)"
+              >
+                x
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><h5>Thành tiền:</h5></td>
+          <td>
+            <h5>{{ totalPrice }}$</h5>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-success" (click)="pay()">Thanh toán</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noSelected>
+      <div class="no-selected">
+        <span>Không có sản phẩm nào trong giỏ hàng của bạn.</span>
+        <a class="btn btn-warning" routerLink="/">Tiếp tục mua sắm</a>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -1,7 +1,11 @@
-<div class="products">
+<section id="products">
   <div class="row">
-    <div class="col-4" *ngFor="let prod of products">
-      <app-product [prod]="prod"></app-product>
+    <div class="col-3" *ngFor="let prod of products">
+      <app-product
+        [prod]="prod"
+        (putToCart)="putToCart($event)"
+        (adjustQuantity)="adjustQuantity($event)"
+      ></app-product>
     </div>
   </div>
-</div>
+</section>
