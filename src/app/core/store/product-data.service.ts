@@ -13,6 +13,12 @@ export class ProductDataService {
   private cart = new BehaviorSubject([] as Cart[]);
   cartProps = this.cart.asObservable();
 
+  private types = new BehaviorSubject([] as string[]);
+  typesProps = this.types.asObservable();
+
+  private filterType = new BehaviorSubject('' as string);
+  filterTypeProps = this.filterType.asObservable();
+
   constructor() { }
 
   actFetchProducts(productsData: Product[]): void {
@@ -21,5 +27,13 @@ export class ProductDataService {
 
   actSetCart(cartData: Cart[]): void {
     this.cart.next(cartData);
+  }
+
+  actSetTypes(typesData: string[]): void {
+    this.types.next(typesData);
+  }
+
+  actSetFilterType(filterTypeData: string): void {
+    this.filterType.next(filterTypeData);
   }
 }

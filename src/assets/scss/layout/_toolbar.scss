@@ -1,0 +1,16 @@
+#toolbar {
+    --else: 100px;
+    margin-top: var(--else);
+    padding-bottom: 40px;
+    overflow-y: auto;
+    height: calc(100vh - var(--else));
+    > ul > li {
+        cursor: pointer;
+    }
+    &::-webkit-scrollbar {
+        background-color: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: transparent;
+    }
+}

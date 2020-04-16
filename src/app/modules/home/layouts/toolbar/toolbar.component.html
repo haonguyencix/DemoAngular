@@ -1,0 +1,15 @@
+<div id="toolbar">
+  <ul class="list-unstyled">
+    <li class="py-1 lead font-weight-bold" (click)="showAll()">Tất cả</li>
+    <li
+      class="py-1 lead"
+      *ngFor="let item of types"
+      (click)="dispatchType(item)"
+    >
+      - {{ item }}
+    </li>
+  </ul>
+  <button class="btn btn-danger" (click)="expand()">
+    {{ !isMore ? "Mở rộng" : "Thu gọn" }}
+  </button>
+</div>

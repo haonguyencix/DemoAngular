@@ -2,7 +2,9 @@
   <div class="card">
     <img class="card-img-top" [src]="prod.image" [alt]="prod.name" />
     <div class="card-body">
-      <h6 class="card-title">{{ prod.name }}</h6>
+      <h6 [title]="prod.name" class="card-title">
+        {{ prod.name.length > 18 ? (prod.name | shortcut: 18) : prod.name }}
+      </h6>
       <p class="card-text">{{ prod.price | number }}$</p>
       <button class="btn btn-primary" (click)="_putToCart(prod)">
         Thêm vào giỏ
