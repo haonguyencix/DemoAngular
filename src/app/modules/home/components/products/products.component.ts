@@ -13,8 +13,10 @@ import { LOCAL } from 'src/app/shared/const';
 })
 export class ProductsComponent implements OnInit, OnDestroy {
   products: Product[] = [];
+  filterArr: Product[] = [];
   cart: Cart[] = [];
   total: number = 0;
+  curPage: number = 1;
   subService: Subscription;
 
   constructor(private productData: ProductDataService) { }
@@ -22,11 +24,16 @@ export class ProductsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.fetchProductsFromStore();
     this.fetchCartFromStore();
+    this.fetchFilterTypeFromStore();
   }
 
   fetchProductsFromStore(): void {
     this.subService = this.productData.productsProps.subscribe((res: Product[]) => {
-      if (res) this.products = res;
+      if (res) {
+        this.products = res;
+        this.filterArr = res;
+        this.productData.actSetTypes(this.mappingTypes(res));
+      };
     })
   }
 
@@ -34,6 +41,24 @@ export class ProductsComponent implements OnInit, OnDestroy {
     this.subService = this.productData.cartProps.subscribe((res: Cart[]) => {
       if (res) this.cart = res;
     })
+  }
+
+  fetchFilterTypeFromStore(): void {
+    this.subService = this.productData.filterTypeProps.subscribe((res: string) => {
+      if (res) {
+        this.filterArr = res === "all" ? this.products : this.filterTypes(res);
+      }
+    })
+  }
+
+  mappingTypes(productArr: Product[]): string[] {
+    let typeArr: string[] = [];
+    productArr.forEach((item: Product) => typeArr.push(item.type));
+    return [...new Set(typeArr)];
+  }
+
+  filterTypes(type: string): Product[] {
+    return this.products.filter((item: Product) => item.type === type)
   }
 
   putToCart(prod: Product): void {

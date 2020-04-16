@@ -1,3 +1,14 @@
 #products {
     padding-top: 100px;
+    > div.row {
+        height: 72vh;
+    }
+    .pagination {
+        float: right;
+        &::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
 }
