@@ -32,9 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   fetchCartFromLocal(): void {
     const cartLocal: Cart[] = getLocalStorage(LOCAL.CART);
-    if (cartLocal) {
-      this.productData.actSetCart(cartLocal);
-    }
+    if (cartLocal) this.productData.actSetCart(cartLocal);
   }
 
   ngOnDestroy(): void {

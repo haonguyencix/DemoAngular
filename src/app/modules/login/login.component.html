@@ -1,0 +1,27 @@
+<div id="login">
+  <h2 class="text-center">Đăng nhập</h2>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm.value)">
+    <div class="form-group">
+      <input
+        class="form-control"
+        name="username"
+        type="text"
+        placeholder="Tên đăng nhập"
+        #Username="ngModel"
+        ngModel
+      />
+    </div>
+    <div class="form-group">
+      <input
+        class="form-control"
+        name="password"
+        type="password"
+        placeholder="Mật khẩu"
+        #Password="ngModel"
+        ngModel
+      />
+    </div>
+    <button type="submit" class="btn btn-success mb-2 w-100">Đăng nhập</button>
+  </form>
+  <span>(Tên đăng nhập: HaroNguyen, mật khẩu: Haro@123)</span>
+</div>

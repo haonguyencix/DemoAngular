@@ -4,10 +4,12 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeModule } from './modules/home/home.module';
+import { LoginModule } from './modules/login/login.module';
 import { NotFoundModule } from './modules/not-found/not-found.module';
 
 const routes: Routes = [
   { path: "", loadChildren: () => HomeModule },
+  { path: "login", loadChildren: () => LoginModule },
   { path: "**", loadChildren: () => NotFoundModule }
 ];
 
