@@ -21,11 +21,11 @@ export class CartComponent implements OnInit, OnDestroy {
   constructor(private productData: ProductDataService, private route: Router) { }
 
   ngOnInit() {
-    this.fetChCartFromStore();
+    this.fetchCartFromStore();
     this.calcTotalPrice();
   }
 
-  fetChCartFromStore(): void {
+  fetchCartFromStore(): void {
     this.subService = this.productData.cartProps.subscribe((res: Cart[]) => {
       if (res) this.cart = res;
     })

@@ -27,6 +27,14 @@
           <span class="badge">{{ total }}</span>
         </li>
       </ul>
+      <ul class="navbar-nav" *ngIf="username">
+        <li class="nav-item">
+          <span class="nav-link">{{ username }}</span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" (click)="logout()">Đăng xuất</span>
+        </li>
+      </ul>
     </div>
   </nav>
 </header>

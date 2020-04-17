@@ -1,3 +1,4 @@
 export const LOCAL = {
-    CART: "CART"
+    CART: "CART",
+    TOKEN: "TOKEN"
 }
