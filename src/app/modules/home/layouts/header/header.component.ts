@@ -4,7 +4,7 @@ import { Cart } from 'src/app/core/models/cart.model';
 import { Subscription } from 'rxjs';
 import { UserDataService } from 'src/app/core/store/user-data.service';
 import { getLocalStorage } from 'src/app/shared/utils';
-import { LOCAL } from 'src/app/shared/const';
+import { LOCAL, PATH } from 'src/app/shared/const';
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,6 +15,8 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit, OnDestroy {
   total: number = 0;
   username: string = "";
+  goToHome: string = PATH["HOME"];
+  goToCart: string = PATH["CART"];
   subService: Subscription;
 
   constructor(private route: Router ,private productData: ProductDataService, private userData: UserDataService) { }
@@ -45,7 +47,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this.userData.actSetUsername('');
     localStorage.removeItem(LOCAL.TOKEN);
-    this.route.navigate(["/login"]);
+    this.route.navigate([PATH["ROOT"]]);
   }
 
   ngOnDestroy(): void {

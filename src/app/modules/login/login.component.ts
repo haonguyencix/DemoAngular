@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { setLocalStorage } from 'src/app/shared/utils';
-import { LOCAL } from 'src/app/shared/const';
+import { LOCAL, PATH } from 'src/app/shared/const';
 import { Router } from '@angular/router';
 import { SweetAlert } from 'sweetalert/typings/core';
 import { UserDataService } from 'src/app/core/store/user-data.service';
@@ -19,12 +19,17 @@ export class LoginComponent implements OnInit {
   }
 
   login(loginForm): void {
-    console.log(loginForm);
     const { username, password } = loginForm;
-    if(username === "HaroNguyen" && password === "Haro@123") {
-      setLocalStorage(LOCAL.TOKEN, "Haro Nguyen - gumi"); // -> gửi token qua headers -> từ token lấy credentials (do để cứng -> token là credentials)
-      this.userData.actSetUsername("Haro Nguyen - gumi");
-      this.route.navigate(['/']);
+    if (password === "123123") {
+      if (username === "Haro") {
+        this.route.navigate([PATH["HOME"]]);
+        setLocalStorage(LOCAL.TOKEN, "Haro - gumi"); // -> gửi token qua headers -> từ token lấy credentials (do để cứng -> token là credentials)
+        this.userData.actSetUsername("Haro - gumi");
+      } else if (username === "HaroAdmin") {
+        this.route.navigate([PATH["ADMIN"]]);
+        setLocalStorage(LOCAL.ADMIN, "HaroAdmin - gumi")
+        this.userData.actSetUsername("HaroAdmin - gumi");
+      }
     } else {
       swal("Tên đăng nhập hoặc mật khẩu không đúng!", { icon: "warning" })
     }

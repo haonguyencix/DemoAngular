@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { getLocalStorage } from "src/app/shared/utils";
-import { LOCAL } from 'src/app/shared/const';
+import { LOCAL, PATH } from 'src/app/shared/const';
 import { SweetAlert } from 'sweetalert/typings/core';
 declare const swal: SweetAlert;
 
@@ -14,7 +14,7 @@ export class CheckLoginGuard implements CanActivate {
   canActivate(): boolean {
     if (getLocalStorage(LOCAL.TOKEN)) return true;
     swal("Không được phép truy cập!", { icon: "error" })
-      .then(() => this.route.navigate(['/login']))
+    this.route.navigate([PATH["ROOT"]]);
     return false;
   }
 }

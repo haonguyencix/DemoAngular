@@ -1,4 +1,12 @@
 export const LOCAL = {
     CART: "CART",
-    TOKEN: "TOKEN"
+    TOKEN: "TOKEN",
+    ADMIN: "ADMIN",
+}
+
+export const PATH = {
+    ROOT: "",
+    HOME: "home",
+    CART: "cart",
+    ADMIN: "admin"
 }

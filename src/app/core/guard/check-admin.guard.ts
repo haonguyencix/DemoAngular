@@ -8,13 +8,13 @@ declare const swal: SweetAlert;
 @Injectable({
   providedIn: 'root'
 })
-export class CheckHomeGuard implements CanActivate {
+export class CheckAdminGuard implements CanActivate {
   constructor(private route: Router) { }
   
   canActivate(): boolean {
-    if (!getLocalStorage(LOCAL.TOKEN)) return true;
-    swal("Bạn đang đăng nhập rồi!", { icon: "error" })
-    this.route.navigate([PATH["HOME"]]);
+    if (getLocalStorage(LOCAL.ADMIN)) return true;
+    swal("Không được phép truy cập!", { icon: "error" })
+    this.route.navigate([PATH["ROOT"]]);
     return false;
   }
 }
