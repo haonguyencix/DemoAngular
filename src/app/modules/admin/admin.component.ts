@@ -32,6 +32,13 @@ export class AdminComponent implements OnInit, OnDestroy {
     this.isEdit = false;
   }
 
+  clearForm(): void {
+    this.name = '';
+    this.image = '';
+    this.price = 0;
+    this.type = '';
+  }
+
   fetchProducts(): void {
     this.subService = this.productsService.fetchProductsFromDB().subscribe((res: Product[]) => {
       if (res) this.products = res;
@@ -42,12 +49,13 @@ export class AdminComponent implements OnInit, OnDestroy {
 
   actProd(actProdForm): void {
     if (this.isEdit) {
-      this.isEdit = false;
       this.subService = this.productsService.updateProductInDB(actProdForm, this.id).subscribe((res: any) => {
         swal({
           title: "Đã cập nhật sản phẩm thành công",
           icon: "success"
         })
+        this.isEdit = false;
+        this.clearForm();
         this.fetchProducts();
       }), err => {
         console.log("HomeComponent -> actProd -> err", err);
@@ -58,15 +66,12 @@ export class AdminComponent implements OnInit, OnDestroy {
           title: "Đã thêm sản phẩm thành công",
           icon: "success"
         })
+        this.clearForm();
         this.fetchProducts();
       }), err => {
         console.log("HomeComponent -> actProd -> err", err);
       }
     }
-    this.name = '';
-    this.image = '';
-    this.price = 0;
-    this.type = '';
   }
 
   remove(id: string): void {
@@ -81,14 +86,13 @@ export class AdminComponent implements OnInit, OnDestroy {
     }
   }
 
-  edit(id: string): void {
+  edit(prod: Product): void {
     this.isEdit = true;
-    const found = this.products.find((prod: Product) => prod.id === id)
-    this.id = found.id;
-    this.name = found.name;
-    this.image = found.image;
-    this.price = found.price;
-    this.type = found.type;
+    this.id = prod.id;
+    this.name = prod.name;
+    this.image = prod.image;
+    this.price = prod.price;
+    this.type = prod.type;
     window.scrollTo({
       top: 0,
       behavior: 'smooth'
