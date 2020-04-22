@@ -1,1 +1,76 @@
-<p>admin works!</p>
+<app-navbar></app-navbar>
+<div id="admin">
+  <div class="container">
+    <form
+      class="card"
+      #actProdForm="ngForm"
+      (ngSubmit)="actProd(actProdForm.value)"
+    >
+      <div class="card-body">
+        <div class="d-flex justify-content-between">
+          <div class="form-group">
+            <span>Tên sản phẩm</span>
+            <input class="form-control" [(ngModel)]="name" name="name" />
+          </div>
+          <div class="form-group">
+            <span>Hình sản phẩm</span>
+            <input class="form-control" [(ngModel)]="image" name="image" />
+          </div>
+          <div class="form-group">
+            <span>Giá</span>
+            <input class="form-control" [(ngModel)]="price" name="price" />
+          </div>
+          <div class="form-group">
+            <span>Loại</span>
+            <input class="form-control" [(ngModel)]="type" name="type" />
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-success mr-2" *ngIf="!isEdit; else editMode">
+            Thêm sản phẩm
+          </button>
+          <ng-template #editMode>
+            <button type="submit" class="btn btn-info mr-2">
+              Cập nhật mới
+            </button>
+          </ng-template>
+          <button type="reset" class="btn btn-warning" (click)="reset()">Làm mới</button>
+        </div>
+      </div>
+    </form> 
+
+    <table class="table">
+      <thead>
+        <tr class="bg-dark text-white">
+          <th>Mã sản phẩm</th>
+          <th>Hình sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Loại</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          [ngClass]="{ 'bg-light': i % 2 === 0 }"
+          *ngFor="let prod of products | paginate: { itemsPerPage: 6, currentPage: curPage }; let i = index"
+        >
+          <td scope="row">{{ prod.id }}</td>
+          <td>{{ prod.image }}</td>
+          <td>{{ prod.name }}</td>
+          <td>{{ prod.price | number }}$</td>
+          <td>{{ prod.type }}</td>
+          <td>
+            <button class="btn btn-danger mr-2" (click)="remove(prod.id)">
+              Remove
+            </button>
+            <button class="btn btn-primary" (click)="edit(prod.id)">
+              Edit
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination-controls class="text-center" (pageChange)="curPage=$event"></pagination-controls>
+  </div>
+</div>

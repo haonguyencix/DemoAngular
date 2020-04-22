@@ -1,0 +1,21 @@
+<nav id="navbar" class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand" [routerLink]="goToHome">Admin Dashboard</a>
+  <button
+    class="navbar-toggler d-lg-none"
+    type="button"
+    data-toggle="collapse"
+    data-target="#collapsibleNavId"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavId">
+    <ul class="navbar-nav" *ngIf="username">
+      <li class="nav-item">
+        <span class="nav-link">{{ username }}</span>
+      </li>
+      <li class="nav-item">
+        <span class="nav-link" (click)="logout()">Đăng xuất</span>
+      </li>
+    </ul>
+  </div>
+</nav>

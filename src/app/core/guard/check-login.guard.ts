@@ -12,9 +12,15 @@ export class CheckLoginGuard implements CanActivate {
   constructor(private route: Router) { }
   
   canActivate(): boolean {
-    if (getLocalStorage(LOCAL.TOKEN)) return true;
-    swal("Không được phép truy cập!", { icon: "error" })
-    this.route.navigate([PATH["ROOT"]]);
-    return false;
+    if (getLocalStorage(LOCAL.TOKEN)) {
+      swal("Bạn đã đăng nhập rồi!", { icon: "error" })
+      this.route.navigate([PATH["HOME"]]);
+      return false;
+    } else if(getLocalStorage(LOCAL.ADMIN)) {
+      swal("Bạn đã đăng nhập rồi!", { icon: "error" })
+      this.route.navigate([PATH["ADMIN"]]);
+      return false;
+    }
+    return true;
   }
 }

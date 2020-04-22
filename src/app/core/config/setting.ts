@@ -4,6 +4,7 @@ export const { baseURL = 'https://5e8be58cbe5500001689eddb.mockapi.io/' } = envi
 
 export const API = {
     products: {
-        fetchProducts: baseURL + '/api/v1/products'
+        fetchProducts: baseURL + '/api/v1/products',
+        updateProducts: (prodId: string) => baseURL + `/api/v1/products/${prodId}`
     }
 }

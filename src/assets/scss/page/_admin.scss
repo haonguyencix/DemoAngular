@@ -1,0 +1,14 @@
+#admin {
+    padding-top: 80px;
+    table.table {
+        height: 58vh;
+    }
+    .pagination {
+        float: right;
+        &::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+    }
+}
