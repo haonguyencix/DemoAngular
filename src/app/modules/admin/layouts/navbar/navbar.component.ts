@@ -1,36 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductDataService } from 'src/app/core/store/product-data.service';
-import { Cart } from 'src/app/core/models/cart.model';
-import { Subscription } from 'rxjs';
 import { UserDataService } from 'src/app/core/store/user-data.service';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { getLocalStorage } from 'src/app/shared/utils';
 import { LOCAL, PATH } from 'src/app/shared/const';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['./navbar.component.scss']
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  total: number = 0;
+export class NavbarComponent implements OnInit, OnDestroy {
   username: string = "";
-  goToHome: string = PATH["HOME"];
-  goToCart: string = PATH["CART"];
   subService: Subscription;
 
   constructor(private route: Router ,private productData: ProductDataService, private userData: UserDataService) { }
 
   ngOnInit() {
-    this.fetchCartFromStore();
     this.fetchUsernameFromStore();
     this.fetchUsernameFromLocal();
-  }
-
-  fetchCartFromStore(): void {
-    this.subService = this.productData.cartProps.subscribe((res: Cart[]) => {
-      if(res) this.total = res.length;
-    });
   }
 
   fetchUsernameFromStore(): void {
@@ -40,13 +29,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   fetchUsernameFromLocal(): void {
-    const usernameLocal: string = getLocalStorage(LOCAL.TOKEN);
+    const usernameLocal: string = getLocalStorage(LOCAL.ADMIN);
     if(usernameLocal) this.userData.actSetUsername(usernameLocal);
   }
 
   logout(): void {
     this.userData.actSetUsername('');
-    localStorage.removeItem(LOCAL.TOKEN);
+    localStorage.removeItem(LOCAL.ADMIN);
     this.route.navigate([PATH["ROOT"]]);
   }
 

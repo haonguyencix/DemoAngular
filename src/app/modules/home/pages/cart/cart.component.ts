@@ -3,7 +3,7 @@ import { Cart } from 'src/app/core/models/cart.model';
 import { Subscription } from 'rxjs';
 import { ProductDataService } from 'src/app/core/store/product-data.service';
 import { setLocalStorage } from 'src/app/shared/utils';
-import { LOCAL } from 'src/app/shared/const';
+import { LOCAL, PATH } from 'src/app/shared/const';
 import { Router } from '@angular/router';
 import { SweetAlert } from 'sweetalert/typings/core';
 declare const swal: SweetAlert;
@@ -16,6 +16,7 @@ declare const swal: SweetAlert;
 export class CartComponent implements OnInit, OnDestroy {
   cart: Cart[] = [];
   totalPrice: number = 0;
+  goToHome: string = PATH["HOME"];
   subService: Subscription;
 
   constructor(private productData: ProductDataService, private route: Router) { }
@@ -73,7 +74,7 @@ export class CartComponent implements OnInit, OnDestroy {
         }).then(() => {
           this.productData.actSetCart([]);
           localStorage.removeItem(LOCAL.CART);
-          this.route.navigate(["/"]);
+          this.route.navigate([PATH["HOME"]]);
         })
       } else {
         swal("Ok bạn, không thanh toán thì thôi!");

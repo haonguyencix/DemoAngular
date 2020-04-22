@@ -5,13 +5,14 @@ import { HomeComponent } from './home.component';
 import { HomepageModule } from './pages/homepage/homepage.module';
 import { CartModule } from './pages/cart/cart.module';
 import { HeaderComponent } from './layouts/header/header.component';
-import { CheckLoginGuard } from 'src/app/core/guard/check-login.guard';
+import { CheckHomeGuard } from 'src/app/core/guard/check-home.guard';
+import { PATH } from 'src/app/shared/const';
 
 const routes: Routes = [
-  { path: "", component: HomeComponent, children: [
-    { path: "", loadChildren: () => HomepageModule },
-    { path: "cart", loadChildren: () => CartModule }
-  ], canActivate: [CheckLoginGuard]}
+  { path: PATH["ROOT"], component: HomeComponent, children: [
+    { path: PATH["ROOT"], loadChildren: () => HomepageModule },
+    { path: PATH["CART"], loadChildren: () => CartModule }
+  ], canActivate: [CheckHomeGuard]}
 ]
 
 @NgModule({
